@@ -52,13 +52,18 @@ let factura = {
 
 async function funcion(cliente, datosFactura) {
   try {
+    let totalSuma = 0;
+    datosFactura.productos.forEach(producto => {
+      totalSuma += producto.cantidad * producto.costo;
+    });
+    console.log("Total: " + totalSuma);
     let idCliente = await mandarQuery(`
     INSERT INTO clientes (Nombre, RFC, Ciudad, CP, Email) 
     VALUES ('${cliente.nombre}', '${cliente.rfc}', '${cliente.ciudad}',28000, '${cliente.email}')`);
 
     let idFactura = await mandarQuery(`
     INSERT INTO facturas (Fecha, Total, FK_Cliente) 
-    VALUES ('${datosFactura.fecha}','${datosFactura.total}', ${idCliente.insertId})`);
+    VALUES ('${datosFactura.fecha}','${totalSuma}', ${idCliente.insertId})`);
 
     datosFactura.productos.forEach(async (producto) => {
       await mandarQuery(`
