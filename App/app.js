@@ -6,21 +6,6 @@ let connection = mysql.createConnection({
   database: 'bdpweb'
 });
 
-/*
-async function createProduct() {
-  connection.query("INSERT INTO Productos (Nombre, Costo, Cantidad) VALUES ('Lapiz', 10, 5)", function (error, results, fields) {
-    if (error) {
-      throw error;
-    } else {
-      return results;
-      //console.log(fields);
-    }
-  });
-}
-*/
-
-
-
 function conectar() {
   try {
     connection.connect();
@@ -81,35 +66,19 @@ async function funcion(cliente, datosFactura) {
     VALUES (${idFactura.insertId},${producto.id},${producto.cantidad},${producto.costo})`);
     });
 
-
-    //let idProducto = await mandarQuery("INSERT INTO Productos (Nombre, Costo, Cantidad) VALUES ('Lapiz', 10, 5)");
-    console.log(idCliente.insertId);
-    console.log(idFactura.insertId);
+    console.log("ID del cliente: " + idCliente.insertId);
+    console.log("ID de la factura: " + idFactura.insertId);
   } catch (error) {
     console.log(error);
   } finally {
     connection.end();
   }
 }
-// "INSERT INTO clientes (Nombre, RFC, Ciudad, CP, Email) VALUES ('Eve', 'ALME2395281E0', 'Colima',28000, 'eved@ucol.mx')"
 
 
 conectar();
-//await funcion("INSERT INTO clientes (Nombre, RFC, Ciudad, CP, Email) VALUES ('Eve', 'ALME2395281E0', 'Colima',28000, 'eved@ucol.mx')");
-
-//let resultado = mandarQuery("INSERT INTO clientes (Nombre, RFC, Ciudad, CP, Email) VALUES ('Eve', 'ALME2395281E0', 'Colima',28000, 'eved@ucol.mx')");
-//console.log(resultado);
-//let sum = await createProduct();
-/*
-funcion("INSERT INTO clientes (Nombre, RFC, Ciudad, CP, Email) VALUES ('Eve', 'ALME2395281E0', 'Colima',28000, 'eved@ucol.mx')").then(e => {
-  console.log(e);
-  funcion("INSERT INTO Productos (Nombre, Costo, Cantidad) VALUES ('Lapiz', 10, 5)").then(i => { console.log(i.insertId) });
-});
-*/
 funcion(cliente, factura);
-//console.log(factura.productos[0].cantidad);
 
-//console.log(id);
 
 
 
